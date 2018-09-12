@@ -1,0 +1,517 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Jackson Template</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<meta name="author" content="" />
+	
+  <!-- Facebook and Twitter integration -->
+	<meta property="og:title" content=""/>
+	<meta property="og:image" content=""/>
+	<meta property="og:url" content=""/>
+	<meta property="og:site_name" content=""/>
+	<meta property="og:description" content=""/>
+	<meta name="twitter:title" content="" />
+	<meta name="twitter:image" content="" />
+	<meta name="twitter:url" content="" />
+	<meta name="twitter:card" content="" />
+
+	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+	<link rel="shortcut icon" href="favicon.ico">
+
+	<link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700" rel="stylesheet">
+	
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="css/animate.css">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="css/icomoon.css">
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<!-- Flexslider  -->
+	<link rel="stylesheet" href="css/flexslider.css">
+	<!-- Flaticons  -->
+	<link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
+	<!-- Owl Carousel -->
+	<link rel="stylesheet" href="css/owl.carousel.min.css">
+	<link rel="stylesheet" href="css/owl.theme.default.min.css">
+	<!-- Theme style  -->
+	<link rel="stylesheet" href="css/style.css">
+
+	<!-- Modernizr JS -->
+	<script src="js/modernizr-2.6.2.min.js"></script>
+	<!-- FOR IE9 below -->
+	<!--[if lt IE 9]>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
+	<script type="text/javascript" src="webjars/jquery/2.2.4/jquery.min.js"></script>
+	<script>
+	function parametroURL(_par) {
+		  var _p = null;
+		  if (location.search) location.search.substr(1).split("&").forEach(function(pllv) {
+		    var s = pllv.split("="), //separamos llave/valor
+		      ll = s[0],
+		      v = s[1] && decodeURIComponent(s[1]); //valor hacemos encode para prevenir url encode
+		    if (ll == _par) { //solo nos interesa si es el nombre del parametro a buscar
+		      if(_p==null){
+		      _p=v; //si es nula, quiere decir que no tiene valor, solo textual
+		      }else if(Array.isArray(_p)){
+		      _p.push(v); //si ya es arreglo, agregamos este valor
+		      }else{
+		      _p=[_p,v]; //si no es arreglo, lo convertimos y agregamos este valor
+		      }
+		    }
+		  });
+		  return _p;
+		}
+	$( document ).ready(function() {
+		var user=parametroURL("usuario");
+		//var pw=parametroURL("password");
+		var url="/getPacienteInfo?email="+user;
+		$(".colorlib-education").hide();
+		$.getJSON(url, function(result){
+        	//alert("entro")
+        	$.each(result, function(i, field){
+            	
+                if(i=="respuesta"){
+                	//alert("entro")
+                	$.each(field, function(cl, va){
+                		if(cl=="nombre"){
+                			//alert("nombre"+$("#nombre").text());
+                    		$("#nombre").text(va);
+                    		$("#colorlib-logo").text(va);
+                			//alert("nombre"+$("#nombre").text())
+                			}
+                		else if(cl=="email")
+                			$("#email").text(va);
+                		else if(cl=="cedula")
+                			$("#cedula").text("CI: "+va);
+                		else if(cl=="frecuenciaCadiaca")
+                			$("#frecuencia").text("Frecuencia Cardíaca: "+va);
+                		else if(cl=="pasos")
+                			$("#pasos").text("Caminata: "+va+" pasos");
+                	});
+                	
+	            }
+	        });
+		});
+		//var url="localhost:9090/getDispositivos?cedula=0107462756";
+		$.getJSON(url, function(result){
+        	//alert("entro")
+        	$.each(result, function(i, field){
+            	
+                if(i=="respuesta"){
+                	//alert("entro")
+                	$.each(field, function(cl, va){
+                		if(cl=="nombre"){
+                			//alert("nombre"+$("#nombre").text());
+                    		$("#nombre").text(va);
+                    		$("#colorlib-logo").text(va);
+                			//alert("nombre"+$("#nombre").text())
+                			}
+                		else if(cl=="email")
+                			$("#email").text(va);
+                		else if(cl=="cedula")
+                			$("#cedula").text("CI: "+va);
+                		else if(cl=="frecuenciaCadiaca")
+                			$("#frecuencia").text("Frecuencia Cardíaca: "+va);
+                		else if(cl=="pasos")
+                			$("#pasos").text("Caminata: "+va+" pasos");
+                	});
+                	
+	            }
+	        });
+		});
+		
+		$("#btnComedor").click(function(){
+	    	var existe=false;
+		    var pw=$("#txt_clave").val();
+		    //alert(pw)
+	    	var url="localhost:9090/cambiaEstadoDispositivoName?id=0"
+	    	//alert("Iluminación Configurada")
+		});
+		$("#btnSala").click(function(){
+	    	var existe=false;
+		    var pw=$("#txt_clave").val();
+		    //alert(pw)
+	    	var url="localhost:9090/cambiaEstadoDispositivoName?id=1"
+	    	//alert("Iluminación Configurada")
+		});
+		$("#btnDormitorio1").click(function(){
+	    	var existe=false;
+		    var pw=$("#txt_clave").val();
+		    //alert(pw)
+	    	var url="localhost:9090/cambiaEstadoDispositivoName?id=3"
+	    	//alert("Iluminación Configurada")
+		});
+		$("#btnDormitorio2").click(function(){
+	    	var existe=false;
+		    var pw=$("#txt_clave").val();
+		    //alert(pw)
+	    	var url="localhost:9090/cambiaEstadoDispositivoName?id=4"
+	    	//alert("Iluminación Configurada")
+		});
+	});
+	
+	
+	</script>
+	</head>
+	<body>
+	<div id="colorlib-page">
+		<div class="container-wrap">
+		<a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"><i></i></a>
+		<aside id="colorlib-aside" role="complementary" class="border js-fullheight">
+			<div class="text-center">
+				<div style="background-image: url(img/pacientemanuel.jpg);" class="author-img"></div>
+				<h1 id="colorlib-logo" ><a href="index.html"></a></h1>
+				<span class="position"><a href="#">Estimado Paciente</a> DE LA CLINICA LUZ DEL CIELO</span>
+			</div>
+			<nav id="colorlib-main-menu" role="navigation" class="navbar">
+				<div id="navbar" class="collapse">
+					<ul>
+						<li class="active"><a href="#" data-nav-section="home">Inicio</a></li>
+						<li><a href="#" data-nav-section="about">Mi Hogar</a></li>
+						<li><a href="#" data-nav-section="contact">Mi Perfil</a></li>
+					</ul>
+				</div>
+			</nav>
+
+			<div class="colorlib-footer">
+				
+			</div>
+
+		</aside>
+
+		<div id="colorlib-main">
+			<section id="colorlib-hero" class="js-fullheight" data-section="home">
+				<div class="flexslider js-fullheight">
+					<ul class="slides">
+				   	<li style="background-image: url(img/MicroLOT2.png);">
+				   		<div class="overlay"></div>
+				   		<div class="container-fluid">
+				   			<div class="row">
+					   			<div class="col-md-6 col-md-offset-3 col-md-pull-3 col-sm-12 col-xs-12 js-fullheight slider-text">
+					   				<div class="slider-text-inner js-fullheight">
+					   					<div class="desc">
+						   					<h1>Basado en <br>MicroIOT</h1>
+						   					<h2>Metodología para la creación sistemas de IoT para AAL<a href="" target="_blank"></a></h2>
+												
+											</div>
+					   				</div>
+					   			</div>
+					   		</div>
+				   		</div>
+				   	</li>
+				   	<li style="background-image: url(img/IoT-Salud.jpg);">
+				   		<div class="overlay"></div>
+				   		<div class="container-fluid">
+				   			<div class="row">
+					   			<div class="col-md-6 col-md-offset-3 col-md-pull-3 col-sm-12 col-xs-12 js-fullheight slider-text">
+					   				<div class="slider-text-inner">
+					   					<div class="desc">
+						   					<h1>Bienvenido al sistema<br>MicroIoT implementación</h1>
+												<h2>100% confiable, resiliente y agnostico <a href="https://colorlib.com/" target="_blank">colorlib.com</a></h2>
+												
+											</div>
+					   				</div>
+					   			</div>
+					   		</div>
+				   		</div>
+				   	</li>
+				  	</ul>
+			  	</div>
+			</section>
+			
+			<div id="colorlib-counter" class="colorlib-counters" style="background-image: url(images/cover_bg_1.jpg);" data-stellar-background-ratio="0.5">
+				<div class="overlay"></div>
+				<div class="colorlib-narrow-content">
+					<div class="row">
+					</div>
+					<div class="row">
+						<div class="col-md-3 text-center animate-box">
+							<span class="colorlib-counter js-counter" data-from="0" data-to="309" data-speed="5000" data-refresh-interval="50"></span>
+							<span class="colorlib-counter-label">Doctores</span>
+						</div>
+						<div class="col-md-3 text-center animate-box">
+							<span class="colorlib-counter js-counter" data-from="0" data-to="356" data-speed="5000" data-refresh-interval="50"></span>
+							<span class="colorlib-counter-label">Pacientes</span>
+						</div>
+						<div class="col-md-3 text-center animate-box">
+							<span class="colorlib-counter js-counter" data-from="0" data-to="30" data-speed="5000" data-refresh-interval="50"></span>
+							<span class="colorlib-counter-label">Hogares Asistidos</span>
+						</div>
+						<div class="col-md-3 text-center animate-box">
+							<span class="colorlib-counter js-counter" data-from="0" data-to="10" data-speed="5000" data-refresh-interval="50"></span>
+							<span class="colorlib-counter-label">Hogares IoT</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<section class="colorlib-about" data-section="about">
+				<div class="colorlib-narrow-content">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="row row-bottom-padded-sm animate-box" data-animate-effect="fadeInLeft">
+								<div class="col-md-12">
+									<div class="about-desc">
+										<span class="heading-meta">Su hogar a su alcance</span>
+										<p><strong>Sistema IoT de AAL by MicroIoT</strong> </p>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-3 animate-box" data-animate-effect="fadeInLeft">
+									<div class="services color-1">
+										<span class="icon2"><i class="icon-bulb" id="Sala"></i></span>
+										
+										<h3>Sala</h3>
+										<button type="button" id="btnSala" onclick="alert('Luces Configuradas')">ON/OFF</button>
+									</div>
+								</div>
+								<div class="col-md-3 animate-box" data-animate-effect="fadeInRight">
+									<div class="services color-2">
+										<span class="icon2"><i class="icon-lightbulb" id="Comedor"></i><i class="icon-coffee"></i></span>
+										<h3>Comedor</h3>
+										<button type="button" id="btnComedor"onclick="alert('Luces Configuradas')">ON/OFF</button>
+									</div>
+								</div>
+								<div class="col-md-3 animate-box" data-animate-effect="fadeInTop">
+									<div class="services color-1" >
+										<span class="icon2" ><i class="icon-bulb" id="Dormitorio1"></i></span>
+										<h3>Dormitorio1</h3>
+										<button type="button" id="btnDormitorio1" onclick="alert('Luces Configuradas')">ON/OFF</button>
+										
+									</div>
+								</div>
+								<div class="col-md-3 animate-box" data-animate-effect="fadeInBottom">
+									<div class="services color-1" >
+										<span class="icon2" ><i class="icon-bulb" id="Dormitorio2"></i></span>
+										<h3>Dormitorio2</h3>
+										<button type="button" id="btnDormitorio2" onclick="alert('Luces Configuradas')">ON/OFF</button>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12 animate-box" data-animate-effect="fadeInLeft">
+									<div class="hire">
+										<h2>La luz de la cocina esta encendida</h2>
+										<a href="#" class="btn-hire">Hire me</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section class="colorlib-education" data-section="education">
+				<div class="colorlib-narrow-content">
+					<div class="row">
+						<div class="col-md-6 col-md-offset-3 col-md-pull-3 animate-box" data-animate-effect="fadeInLeft">
+							<span class="heading-meta">Pacientes</span>
+							<h2 class="colorlib-heading animate-box">Pacientes Hospital Regional</h2>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12 animate-box" data-animate-effect="fadeInLeft">
+							<div class="fancy-collapse-panel">
+								<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+									<div class="panel panel-default">
+									    <div class="panel-heading" role="tab" id="headingOne">
+									        <h4 class="panel-title">
+									            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Sr. Luis Alfredo Ortega Perez
+									            </a>
+									        </h4>
+									    </div>
+									    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+									         <div class="panel-body">
+									            <div class="row">
+										      		<div class="col-md-6">
+										      			<p>El paciente dio <b>6350 pasos</b></p>
+														<p>La frecuencia cardiaca del paciente es:    <b>76 pulsasiones por minuto</b><p>
+										      		</div>
+										      		<div class="col-md-6">
+										      			<p>Edad del paciente: <b>65 años</b></p>
+														<p>Cédula del paciente: <b>01027784585</b></p>
+										      		</div>
+										      	</div>
+									         </div>
+									    </div>
+									</div>
+									<div class="panel panel-default">
+									    <div class="panel-heading" role="tab" id="headingTwo">
+									        <h4 class="panel-title">
+									            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Sra. Maria Jose Cordova Galarza
+									            </a>
+									        </h4>
+									    </div>
+									    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+									        <div class="panel-body">
+									            <p>Far far away, behind the word <strong>mountains</strong>, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+													<ul>
+														<li>Separated they live in Bookmarksgrove right</li>
+														<li>Separated they live in Bookmarksgrove right</li>
+													</ul>
+									        </div>
+									    </div>
+									</div>
+									<div class="panel panel-default">
+									    <div class="panel-heading" role="tab" id="headingThree">
+									        <h4 class="panel-title">
+									            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Sr. Pedro Fernando Salinas Salinas
+									            </a>
+									        </h4>
+									    </div>
+									    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+									        <div class="panel-body">
+									            <p>Far far away, behind the word <strong>mountains</strong>, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>	
+									        </div>
+									    </div>
+									</div>
+
+									<div class="panel panel-default">
+									    <div class="panel-heading" role="tab" id="headingFour">
+									        <h4 class="panel-title">
+									            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+									            </a>
+									        </h4>
+									    </div>
+									    <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+									        <div class="panel-body">
+									            <p> <strong></strong>, </p>	
+									        </div>
+									    </div>
+									</div>
+
+									<div class="panel panel-default">
+									    <div class="panel-heading" role="tab" id="headingFive">
+									        <h4 class="panel-title">
+									            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">Srta. Josselyn Fernanda Jerves Ortiz
+									            </a>
+									        </h4>
+									    </div>
+									    <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
+									        <div class="panel-body">
+									            <p>Far far away, behind the word <strong>mountains</strong>, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>	
+									        </div>
+									    </div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section class="colorlib-contact" data-section="contact">
+				<div class="colorlib-narrow-content">
+					<div class="row">
+						<div class="col-md-6 col-md-offset-3 col-md-pull-3 animate-box" data-animate-effect="fadeInLeft">
+							<span class="heading-meta">Get in Touch</span>
+							<h2 class="colorlib-heading">Contact</h2>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-5">
+							<div class="colorlib-feature colorlib-feature-sm animate-box" data-animate-effect="fadeInLeft">
+								<div class="colorlib-icon">
+									<i class="icon-globe-outline"></i>
+								</div>
+								<div class="colorlib-text">
+									<p id="email"><a href="#">info@domain.com</a></p>
+								</div>
+							</div>
+
+							<div class="colorlib-feature colorlib-feature-sm animate-box" data-animate-effect="fadeInLeft">
+								<div class="colorlib-icon">
+									<i class="icon-map"></i>
+								</div>
+								<div class="colorlib-text">
+									<p id="nombre" >198 West 21th Street, Suite 721 New York NY 10016</p>
+								</div>
+							</div>
+
+							<div class="colorlib-feature colorlib-feature-sm animate-box" data-animate-effect="fadeInLeft">
+								<div class="colorlib-icon">
+									<i class="icon-map"></i>
+								</div>
+								<div class="colorlib-text">
+									<p id="cedula">+123 456 7890</p>
+								</div>
+							</div>
+							
+							<div class="colorlib-feature colorlib-feature-sm animate-box" data-animate-effect="fadeInLeft">
+								<div class="colorlib-icon">
+									<i class="icon-map"></i>
+								</div>
+								<div class="colorlib-text">
+									<p id="frecuencia">Frecuencia Cardíaca:</p>
+								</div>
+							</div>
+							<div class="colorlib-feature colorlib-feature-sm animate-box" data-animate-effect="fadeInLeft">
+								<div class="colorlib-icon">
+									<i class="icon-map"></i>
+								</div>
+								<div class="colorlib-text">
+									<p id="pasos">Caminata: </p>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-7 col-md-push-1">
+							<div class="row">
+								<div class="col-md-10 col-md-offset-1 col-md-pull-1 animate-box" data-animate-effect="fadeInRight">
+									<form action="">
+										<div class="form-group">
+											<input type="text" class="form-control" placeholder="Nombre">
+										</div>
+										<div class="form-group">
+											<input type="text" class="form-control" placeholder="Email">
+										</div>
+										<div class="form-group">
+											<input type="text" class="form-control" placeholder="Cédula">
+										</div>
+										<div class="form-group">
+											
+										</div>
+										<div class="form-group">
+											<input type="submit" class="btn btn-primary btn-send-message" value="Actualizar Información">
+										</div>
+									</form>
+								</div>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+		</div><!-- end:colorlib-main -->
+	</div><!-- end:container-wrap -->
+	</div><!-- end:colorlib-page -->
+
+	<!-- jQuery -->
+	<script src="js/jquery.min.js"></script>
+	<!-- jQuery Easing -->
+	<script src="js/jquery.easing.1.3.js"></script>
+	<!-- Bootstrap -->
+	<script src="js/bootstrap.min.js"></script>
+	<!-- Waypoints -->
+	<script src="js/jquery.waypoints.min.js"></script>
+	<!-- Flexslider -->
+	<script src="js/jquery.flexslider-min.js"></script>
+	<!-- Owl carousel -->
+	<script src="js/owl.carousel.min.js"></script>
+	<!-- Counters -->
+	<script src="js/jquery.countTo.js"></script>
+	
+	
+	<!-- MAIN JS -->
+	<script src="js/main.js"></script>
+
+	</body>
+</html>
+
